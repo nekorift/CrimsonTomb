@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4598472568003591403}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -111,7 +111,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 6200000, guid: e654fcd3b71248747859afd0c651cb99, type: 2}
+  m_Material: {fileID: 6200000, guid: aa95f9b00790ace4283882a0f9d3f254, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -175,29 +175,29 @@ MonoBehaviour:
   currentHealth: 0
   moveSpeed: 5
   maxSpeed: 5
-  jumpForce: 10
+  jumpForce: 5
   baseDamage: 1
-  body: {fileID: 0}
-  animator: {fileID: 0}
-  spriteRenderer: {fileID: 0}
-  col: {fileID: 0}
+  activeIframes: 0
+  iframeLength: 1
   canJump: 0
-  currentJumps: 0
-  facingRight: 1
   isOnGround: 0
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  facingRight: 1
+  animator: {fileID: 0}
+  currentJumps: 0
   hasDoubleJump: 0
   maxJumps: 1
   hasDash: 0
   canDash: 0
   isDashing: 0
-  dashVelocity: 30
+  dashVelocity: 10
   dashTime: 0.2
   hasSprint: 0
+  isSprinting: 0
+  sprintSpeed: 10
   hasWallJump: 0
-  cam: {fileID: 0}
 --- !u!114 &4598472568003591403
 MonoBehaviour:
   m_ObjectHideFlags: 0
