@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class EnemyWalker : Character
@@ -10,22 +9,15 @@ public class EnemyWalker : Character
     {
         base.Start();
 
-        player = GameObject.FindGameObjectWithTag("Player");
-        if (player == null)
-            Debug.LogError("Player not found in the scene. Please ensure there is a GameObject with the tag 'Player'.");
-        else if (player.transform.position.x > transform.position.x)
-            facingRight = true;
-        else
-            facingRight = false;
+        player = FindPlayer();
+        TurnToPlayer(player);
     }
 
     void FixedUpdate()
     {
-        CheckIsOnGround();
-
         if (facingRight)
         {
-            if (isOnGround)
+            if (IsOnGround())
                 body.AddForce(new Vector2(moveSpeed, 0), ForceMode2D.Force);
 
             if (body.linearVelocity.x > maxSpeed)
@@ -33,7 +25,7 @@ public class EnemyWalker : Character
         }
         else if (!facingRight)
         {
-            if (isOnGround)
+            if (IsOnGround())
                 body.AddForce(new Vector2(-moveSpeed, 0), ForceMode2D.Force);
 
             if (body.linearVelocity.x < -maxSpeed)

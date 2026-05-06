@@ -21,7 +21,7 @@ public class Player : Character
     [SerializeField] private bool isSprinting = false;
     [SerializeField] private float sprintSpeed = 10f;
 
-    public bool hasWallJump = false;
+    public bool hasWallSlide = false;
 
     // Components
     private Camera cam;
@@ -47,14 +47,14 @@ public class Player : Character
         if (!isDashing && !activeIframes) // Ensure only dash can override the player's velocity, otherwise the player will be able to move during the dash which is not intended
             body.AddForce(new Vector2(movementInput.x, 0) * moveSpeed, ForceMode2D.Force);
 
-        if (!isSprinting)
+        if (!isSprinting && !isDashing)
         {
             if (body.linearVelocity.x > maxSpeed)
                 body.linearVelocity = new Vector2(maxSpeed, body.linearVelocity.y);
             else if (body.linearVelocity.x < -maxSpeed)
                 body.linearVelocity = new Vector2(-maxSpeed, body.linearVelocity.y);
         }
-        else
+        else if (isSprinting && !isDashing)
         {
             if (body.linearVelocity.x > sprintSpeed)
                 body.linearVelocity = new Vector2(sprintSpeed, body.linearVelocity.y);
@@ -68,10 +68,18 @@ public class Player : Character
             StartCoroutine(StopSprinting()); // Stop sprinting after a short delay to allow for switching sides without immediately stopping sprinting
         }
 
-        CheckIsOnGround();
-        if (isOnGround)
+        if (hasWallSlide)
+        {
+            if (IsBackTouchingWall() && !IsOnGround() && movementInput.x != 0)
+                body.linearVelocity = new Vector2(body.linearVelocity.x, Mathf.Clamp(body.linearVelocity.y, -2f, float.MaxValue)); // Limit the player's falling speed while wall sliding
+            else if (IsTouchingWall() && !IsOnGround() && movementInput.x != 0)
+                facingRight = !facingRight; // Flip the player's facing direction if they are touching a wall and not on the ground, to allow for wall sliding in both directions
+        }
+
+        if (IsOnGround())
         {
             currentJumps = 0;
+            //activeIframes = false; // Remove i-frames if the player touches the ground before iframes run out
             canJump = true;
             canDash = true;
         }
@@ -101,13 +109,13 @@ public class Player : Character
         else
             canJump = false;
 
-        if (input.isPressed && canJump && isOnGround)
+        if (input.isPressed && canJump && IsOnGround())
         {
             body.linearVelocity = new Vector2(body.linearVelocity.x, 0); // Reset vertical velocity to ensure consistent jump height
             body.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             currentJumps++;
         }
-        else if (input.isPressed && canJump && !isOnGround && hasDoubleJump)
+        else if (input.isPressed && canJump && !IsOnGround() && hasDoubleJump)
         {
             if (currentJumps == 0)
             {
@@ -146,6 +154,12 @@ public class Player : Character
         }
     }
 
+    public void OnSprint(InputValue input)
+    {
+        if (input.isPressed && hasSprint && IsOnGround())
+            isSprinting = !isSprinting; // Toggle sprint
+    }
+
     private IEnumerator Dash()
     {
         // Get direction
@@ -168,12 +182,6 @@ public class Player : Character
         //Debug.Log("Dash successful!");
         body.gravityScale = originalGravity;
         isDashing = false;
-    }
-
-    public void OnSprint(InputValue input)
-    {
-        if (input.isPressed && hasSprint && isOnGround)
-            isSprinting = !isSprinting; // Toggle sprint
     }
 
     private IEnumerator StopSprinting()
