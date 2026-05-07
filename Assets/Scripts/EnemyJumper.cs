@@ -13,15 +13,6 @@ public class EnemyJumper : Character
         TurnToPlayer(player);
     }
 
-    void FixedUpdate()
-    {
-        //if (IsOnGround())
-        //{
-        //    TurnToPlayer(player);
-        //    StartCoroutine(Jump());
-        //}
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //int layerGround = LayerMask.NameToLayer("Ground");

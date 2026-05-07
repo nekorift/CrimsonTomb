@@ -17,7 +17,7 @@ public class EnemyWalker : Character
     {
         if (facingRight)
         {
-            if (IsOnGround())
+            if (IsOnGround() && !activeIframes)
                 body.AddForce(new Vector2(moveSpeed, 0), ForceMode2D.Force);
 
             if (body.linearVelocity.x > maxSpeed)
@@ -25,7 +25,7 @@ public class EnemyWalker : Character
         }
         else if (!facingRight)
         {
-            if (IsOnGround())
+            if (IsOnGround() && !activeIframes)
                 body.AddForce(new Vector2(-moveSpeed, 0), ForceMode2D.Force);
 
             if (body.linearVelocity.x < -maxSpeed)
@@ -46,6 +46,11 @@ public class EnemyWalker : Character
             Character player = collision.gameObject.GetComponent<Character>();
             Vector2 direction = (player.transform.position.x < transform.position.x) ? Vector2.left : Vector2.right; // Find direction of knockback
             player.RecieveDamage(baseDamage, direction);
+        }
+        else if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            body.linearVelocity = new Vector2(0, body.linearVelocity.y); // Reset horizontal velocity to ensure enemy doesnt slide across the floor
+            TurnToPlayer(player);
         }
     }
 }

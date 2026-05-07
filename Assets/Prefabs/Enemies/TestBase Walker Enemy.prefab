@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4483505447085300037}
   m_Layer: 7
   m_Name: TestBase Walker Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -179,6 +179,7 @@ MonoBehaviour:
   baseDamage: 1
   activeIframes: 0
   iframeLength: 0.5
+  knockbackForce: 2
   canJump: 0
   groundLayer:
     serializedVersion: 2

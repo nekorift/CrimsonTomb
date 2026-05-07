@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,6 +7,8 @@ public class Player : Character
 {
     // Variables
     [SerializeField] private float currentJumps = 0;
+    [SerializeField] private bool isAttacking = false;
+    [SerializeField] private float attackLength = 0.3f;
 
     // Abilities Variables
     public bool hasDoubleJump = false;
@@ -26,6 +29,8 @@ public class Player : Character
     // Components
     private Camera cam;
     private PlayerInput input;
+    [SerializeField] private GameObject rightAttack;
+    [SerializeField] private GameObject leftAttack;
 
     // Input
     private Vector2 movementInput;
@@ -62,7 +67,7 @@ public class Player : Character
                 body.linearVelocity = new Vector2(-sprintSpeed, body.linearVelocity.y);
         }
 
-        if (movementInput.x < 0.5 && movementInput.x > -0.5f && !isDashing && !activeIframes)
+        if (movementInput.x < 0.5 && movementInput.x > -0.5f && !isDashing && !activeIframes && IsOnGround())
         {
             body.linearVelocity = new Vector2(0, body.linearVelocity.y);
             StartCoroutine(StopSprinting()); // Stop sprinting after a short delay to allow for switching sides without immediately stopping sprinting
@@ -70,6 +75,9 @@ public class Player : Character
 
         if (hasWallSlide)
         {
+            if (IsBackTouchingWall())
+                currentJumps = 0; // Reset jumps when wall sliding to allow for infinite wall jumps regardless of whether the player has double jump or not
+
             if (IsBackTouchingWall() && !IsOnGround() && movementInput.x != 0)
                 body.linearVelocity = new Vector2(body.linearVelocity.x, Mathf.Clamp(body.linearVelocity.y, -2f, float.MaxValue)); // Limit the player's falling speed while wall sliding
             else if (IsTouchingWall() && !IsOnGround() && movementInput.x != 0)
@@ -115,6 +123,12 @@ public class Player : Character
             body.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             currentJumps++;
         }
+        else if (input.isPressed && canJump && hasWallSlide && IsBackTouchingWall() && !IsOnGround())
+        {
+            body.linearVelocity = Vector2.zero; // Reset velocity to ensure consistent jump height
+            body.AddForce(new Vector2(-movementInput.x * jumpForce * 2, jumpForce), ForceMode2D.Impulse); // Jump in the opposite direction of the wall
+            currentJumps++;
+        }
         else if (input.isPressed && canJump && !IsOnGround() && hasDoubleJump)
         {
             if (currentJumps == 0)
@@ -131,6 +145,43 @@ public class Player : Character
                 currentJumps++;
             }
         }
+    }
+
+    public void OnAttack(InputValue input)
+    {
+        if (input.isPressed && !isDashing && !activeIframes && !isAttacking)
+        {
+            if (facingRight)
+                StartCoroutine(Attack(rightAttack));
+            else
+                StartCoroutine(Attack(leftAttack));
+        }
+    }
+
+    private IEnumerator Attack(GameObject attack)
+    {
+        Debug.Log("Attack activated! Facing right: " + facingRight);
+        Collider2D attackCollider = attack.GetComponent<Collider2D>();  
+
+        isAttacking = true;
+        attackCollider.enabled = true;
+        yield return new WaitForSeconds(attackLength);
+        isAttacking = false;
+        attackCollider.enabled = false;
+    }
+
+    public void OnSprint(InputValue input)
+    {
+        if (input.isPressed && hasSprint && IsOnGround())
+            isSprinting = !isSprinting; // Toggle sprint
+    }
+
+    private IEnumerator StopSprinting()
+    {
+        yield return new WaitForSeconds(0.5f); // Delay before stopping sprinting to allow for switching sides without immediately stopping sprinting
+
+        if (movementInput.x < 0.5 && movementInput.x > -0.5f && !isDashing)
+            isSprinting = false;
     }
 
     public void OnDash(InputValue input)
@@ -152,12 +203,6 @@ public class Player : Character
 
             StartCoroutine(Dash());
         }
-    }
-
-    public void OnSprint(InputValue input)
-    {
-        if (input.isPressed && hasSprint && IsOnGround())
-            isSprinting = !isSprinting; // Toggle sprint
     }
 
     private IEnumerator Dash()
@@ -182,13 +227,5 @@ public class Player : Character
         //Debug.Log("Dash successful!");
         body.gravityScale = originalGravity;
         isDashing = false;
-    }
-
-    private IEnumerator StopSprinting()
-    {
-        yield return new WaitForSeconds(0.5f); // Delay before stopping sprinting to allow for switching sides without immediately stopping sprinting
-
-        if (movementInput.x < 0.5 && movementInput.x > -0.5f && !isDashing)
-            isSprinting = false;
     }
 }

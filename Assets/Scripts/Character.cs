@@ -12,6 +12,7 @@ public class Character : MonoBehaviour
     [SerializeField] public float baseDamage = 1f;
     [SerializeField] protected bool activeIframes = false;
     [SerializeField] protected float iframeLength = 0.5f;
+    [SerializeField] protected float knockbackForce = 2f;
 
     [SerializeField] protected bool canJump;
     [SerializeField] protected LayerMask groundLayer;
@@ -47,7 +48,12 @@ public class Character : MonoBehaviour
             {
                 body.linearVelocity = Vector2.zero; // Reset velocity to ensure consistent knockback regardless of current movement
                 //body.linearVelocity += new Vector2(direction ? -15f : 15f, 5f);
-                body.AddForce(new Vector2(direction.x * 5f, 5f), ForceMode2D.Impulse);
+                body.AddForce(new Vector2(direction.x * knockbackForce, knockbackForce), ForceMode2D.Impulse);
+            }
+            else if (gameObject.tag == "Enemy")
+            {
+                body.linearVelocity = Vector2.zero; // Reset velocity to ensure consistent knockback regardless of current movement
+                body.AddForce(new Vector2(direction.x * knockbackForce, knockbackForce), ForceMode2D.Impulse);
             }
 
             Debug.Log(gameObject.name + " received " + damage + " damage. Current health: " + currentHealth);
