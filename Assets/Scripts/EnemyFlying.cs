@@ -14,6 +14,11 @@ public class EnemyFlying : Character
         player = FindPlayer();
         TurnToPlayer(player);
 
+        if (facingRight)
+            spriteRenderer.flipX = false;
+        else
+            spriteRenderer.flipX = true;
+
         top = transform.position.y + jumpForce;
         bottom = transform.position.y - jumpForce;
     }

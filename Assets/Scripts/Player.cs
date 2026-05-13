@@ -40,6 +40,7 @@ public class Player : Character
         base.Start();
         input = GetComponent<PlayerInput>();
         cam = Camera.main;
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -48,6 +49,7 @@ public class Player : Character
         cam.transform.position = new Vector3(transform.position.x, transform.position.y, cam.transform.position.z);
 
         // Movement
+
         //body.linearVelocity = new Vector2(movementInput.x * moveSpeed, body.linearVelocity.y);
         if (!isDashing && !activeIframes) // Ensure only dash can override the player's velocity, otherwise the player will be able to move during the dash which is not intended
             body.AddForce(new Vector2(movementInput.x, 0) * moveSpeed, ForceMode2D.Force);
@@ -67,7 +69,7 @@ public class Player : Character
                 body.linearVelocity = new Vector2(-sprintSpeed, body.linearVelocity.y);
         }
 
-        if (movementInput.x < 0.5 && movementInput.x > -0.5f && !isDashing && !activeIframes && IsOnGround())
+        if (movementInput.x < 0.1 && movementInput.x > -0.1f && !isDashing && !activeIframes && IsOnGround())
         {
             body.linearVelocity = new Vector2(0, body.linearVelocity.y);
             StartCoroutine(StopSprinting()); // Stop sprinting after a short delay to allow for switching sides without immediately stopping sprinting
@@ -83,6 +85,15 @@ public class Player : Character
             else if (IsTouchingWall() && !IsOnGround() && movementInput.x != 0)
                 facingRight = !facingRight; // Flip the player's facing direction if they are touching a wall and not on the ground, to allow for wall sliding in both directions
         }
+        if (isAttacking && IsOnGround())
+        {
+            body.linearVelocity = new Vector2(0, body.linearVelocity.y); // Prevent movement input during attack to ensure the player can't move during the attack animation, which is not intended
+        }
+
+        if (body.linearVelocity.x > 0.1f)
+            facingRight = true;
+        else if (body.linearVelocity.x < -0.1f)
+            facingRight = false;
 
         if (IsOnGround())
         {
@@ -91,16 +102,39 @@ public class Player : Character
             canJump = true;
             canDash = true;
         }
+
+        // Sprites and animations
+        if(facingRight)
+            spriteRenderer.flipX = false;
+        else
+            spriteRenderer.flipX = true;
+
+        if (currentHealth <= 0)
+            animator.Play("PlayerDeath");
+        else if (activeIframes && !IsOnGround())
+            animator.Play("PlayerDamageAir");
+        else if (activeIframes && IsOnGround())
+            animator.Play("PlayerDamageGround");
+        else if (isAttacking)
+            animator.Play("PlayerAttack");
+        else if (isDashing)
+            animator.Play("PlayerDash");
+        else if (hasWallSlide && IsBackTouchingWall() && !IsOnGround() && movementInput.x != 0)
+            animator.Play("PlayerWallSlide");
+        else if (!IsOnGround())
+            animator.Play("PlayerJump");
+        else if (movementInput.x != 0 && IsOnGround() && !isSprinting)
+            animator.Play("PlayerWalk");
+        else if (movementInput.x != 0 && IsOnGround() && isSprinting)
+            animator.Play("PlayerSprint");
+        else if (movementInput.x == 0 && IsOnGround())
+            animator.Play("PlayerIdle");
+
     }
 
     public void OnMove(InputValue input)
     {
         movementInput = input.Get<Vector2>();
-
-        if (movementInput.x > 0)
-            facingRight = true;
-        else if (movementInput.x < 0)
-            facingRight = false;
     }
 
     public void OnJump(InputValue input)

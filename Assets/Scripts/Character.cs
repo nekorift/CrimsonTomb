@@ -44,15 +44,10 @@ public class Character : MonoBehaviour
             currentHealth -= damage;
             StartCoroutine(Iframe());
 
-            if (gameObject.tag == "Player")
+            if (gameObject.tag == "Player" || gameObject.tag == "Enemy")
             {
                 body.linearVelocity = Vector2.zero; // Reset velocity to ensure consistent knockback regardless of current movement
                 //body.linearVelocity += new Vector2(direction ? -15f : 15f, 5f);
-                body.AddForce(new Vector2(direction.x * knockbackForce, knockbackForce), ForceMode2D.Impulse);
-            }
-            else if (gameObject.tag == "Enemy")
-            {
-                body.linearVelocity = Vector2.zero; // Reset velocity to ensure consistent knockback regardless of current movement
                 body.AddForce(new Vector2(direction.x * knockbackForce, knockbackForce), ForceMode2D.Impulse);
             }
 
@@ -60,7 +55,14 @@ public class Character : MonoBehaviour
 
             if (currentHealth <= 0)
             {
-                // ADD DEATH LOGIC HERE
+                if (gameObject.tag == "Player")
+                {
+
+                }
+                else if (gameObject.tag == "Enemy")
+                {
+                    Destroy(gameObject);
+                }
             }
         }
         else

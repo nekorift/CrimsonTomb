@@ -34,6 +34,11 @@ public class EnemyWalker : Character
         else
             Debug.LogError("Facing direction not set correctly for " + gameObject.name);
 
+        if (facingRight)
+            spriteRenderer.flipX = false;
+        else
+            spriteRenderer.flipX = true;
+
         //if (body.linearVelocity.x < 0.5 && body.linearVelocity.x > -0.5f)
         if (IsTouchingWall() && body.linearVelocity.x == 0)
             facingRight = !facingRight;

@@ -5,6 +5,7 @@ public class EnemyJumper : Character
 {
     // Variables
     [SerializeField] private GameObject player;
+    [SerializeField] private Sprite[] sprites;
 
     protected override void Start()
     {
@@ -28,13 +29,20 @@ public class EnemyJumper : Character
             Debug.Log(gameObject.name + " collided with the ground");
             body.linearVelocity = new Vector2(0, body.linearVelocity.y); // Reset horizontal velocity to ensure enemy doesnt slide across the floor
             TurnToPlayer(player);
+            spriteRenderer.sprite = sprites[0];
             StartCoroutine(Jump());
         }
+
+        if (facingRight)
+            spriteRenderer.flipX = false;
+        else
+            spriteRenderer.flipX = true;
     }
 
     private IEnumerator Jump()
     {
         yield return new WaitForSeconds(1.5f); // Delay the enemy from jumping instantly
+        spriteRenderer.sprite = sprites[1];
         body.AddForce(new Vector2(facingRight ? moveSpeed : -moveSpeed, jumpForce), ForceMode2D.Impulse);
     }
 }
