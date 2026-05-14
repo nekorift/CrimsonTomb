@@ -317,7 +317,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: aa95f9b00790ace4283882a0f9d3f254, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -360,7 +360,7 @@ MonoBehaviour:
   currentHealth: 0
   moveSpeed: 5
   maxSpeed: 5
-  jumpForce: 5
+  jumpForce: 8
   baseDamage: 1
   activeIframes: 0
   iframeLength: 1
