@@ -9,6 +9,7 @@ public class Player : Character
     [SerializeField] private float currentJumps = 0;
     [SerializeField] private bool isAttacking = false;
     [SerializeField] private float attackLength = 0.3f;
+    [SerializeField] public Vector2 spawnLocation;
 
     // Abilities Variables
     public bool hasDoubleJump = false;
@@ -27,29 +28,26 @@ public class Player : Character
     public bool hasWallSlide = false;
 
     // Components
-    private Camera cam;
     private PlayerInput input;
     [SerializeField] private GameObject rightAttack;
     [SerializeField] private GameObject leftAttack;
+    public GameObject Fade;
 
     // Input
     private Vector2 movementInput;
 
     protected override void Start()
     {
+        DontDestroyOnLoad(this);
         base.Start();
+        transform.position = spawnLocation;
         input = GetComponent<PlayerInput>();
-        cam = Camera.main;
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
     {
-        // Camera
-        cam.transform.position = new Vector3(transform.position.x, transform.position.y, cam.transform.position.z);
-
         // Movement
-
         //body.linearVelocity = new Vector2(movementInput.x * moveSpeed, body.linearVelocity.y);
         if (!isDashing && !activeIframes) // Ensure only dash can override the player's velocity, otherwise the player will be able to move during the dash which is not intended
             body.AddForce(new Vector2(movementInput.x, 0) * moveSpeed, ForceMode2D.Force);

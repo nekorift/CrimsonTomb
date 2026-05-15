@@ -17,7 +17,7 @@ public class Character : MonoBehaviour
     [SerializeField] protected bool canJump;
     [SerializeField] protected LayerMask groundLayer;
 
-    [SerializeField] protected bool facingRight = true; // true for right, false for left
+    [SerializeField] public bool facingRight = true; // true for right, false for left
 
     // Components
     protected Rigidbody2D body;
