@@ -19,4 +19,6 @@ public class GameManager : MonoBehaviour
         player.transform.position = location;
         player.facingRight = facingRight;
     }
+
+    // Implement save/load later
 }
