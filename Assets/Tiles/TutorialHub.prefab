@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3438726385892260743}
   - component: {fileID: 1712910641918757591}
   m_Layer: 0
-  m_Name: New Palette
+  m_Name: TutorialHub
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
