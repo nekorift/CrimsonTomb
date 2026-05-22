@@ -75,9 +75,6 @@ public class Player : Character
 
         if (hasWallSlide)
         {
-            if (IsBackTouchingWall())
-                currentJumps = 0; // Reset jumps when wall sliding to allow for infinite wall jumps regardless of whether the player has double jump or not
-
             if (IsBackTouchingWall() && !IsOnGround() && movementInput.x != 0)
                 body.linearVelocity = new Vector2(body.linearVelocity.x, Mathf.Clamp(body.linearVelocity.y, -2f, float.MaxValue)); // Limit the player's falling speed while wall sliding
             else if (IsTouchingWall() && !IsOnGround() && movementInput.x != 0)
@@ -93,7 +90,7 @@ public class Player : Character
         else if (body.linearVelocity.x < -0.1f)
             facingRight = false;
 
-        if (IsOnGround())
+        if (IsOnGround() || (hasWallSlide && IsBackTouchingWall()))
         {
             currentJumps = 0;
             //activeIframes = false; // Remove i-frames if the player touches the ground before iframes run out
