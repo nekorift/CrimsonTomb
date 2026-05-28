@@ -8,6 +8,7 @@ public class EnemyAttackHitbox : MonoBehaviour
     {
         parent = transform.parent.gameObject;
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -18,6 +19,7 @@ public class EnemyAttackHitbox : MonoBehaviour
             player.RecieveDamage(self.baseDamage, direction);
         }
     }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("PlayerSpawner"))

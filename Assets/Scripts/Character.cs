@@ -5,7 +5,7 @@ public class Character : MonoBehaviour
 {
     // Variables
     [SerializeField] protected float maxHealth = 1f;
-    [SerializeField] protected float currentHealth;
+    [SerializeField] public float currentHealth;
     [SerializeField] protected float moveSpeed = 5f;
     [SerializeField] protected float maxSpeed = 5f;
     [SerializeField] protected float jumpForce = 10f;
