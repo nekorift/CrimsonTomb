@@ -23,5 +23,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Spires3.unity
     guid: 8417cb27b51878a4e82da398d54e788b
+  - enabled: 1
+    path: Assets/Scenes/Causeway1.unity
+    guid: 333a2ec4d110e2e4e97be25feb1a598b
+  - enabled: 1
+    path: Assets/Scenes/Causeway2.unity
+    guid: a4e31dc3351bcad4990251f66f96da44
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
