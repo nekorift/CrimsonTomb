@@ -12,12 +12,11 @@ public class GameManager : MonoBehaviour
             player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
-    public void LoadScene(string scene, Vector2 location, bool facingRight)
+    public void LoadScene(string scene, Vector2 location)
     {
-        player.spawnLocation = location;
         SceneManager.LoadScene(scene);
+        player.spawnLocation = location;
         player.transform.position = location;
-        player.facingRight = facingRight;
     }
 
     // Implement save/load later

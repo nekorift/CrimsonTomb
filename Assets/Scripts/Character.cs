@@ -10,7 +10,7 @@ public class Character : MonoBehaviour
     [SerializeField] protected float maxSpeed = 5f;
     [SerializeField] protected float jumpForce = 10f;
     [SerializeField] public float baseDamage = 1f;
-    [SerializeField] protected bool activeIframes = false;
+    [SerializeField] public bool activeIframes = false;
     [SerializeField] protected float iframeLength = 0.5f;
     [SerializeField] protected float knockbackForce = 2f;
 

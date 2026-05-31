@@ -29,5 +29,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Causeway2.unity
     guid: a4e31dc3351bcad4990251f66f96da44
+  - enabled: 1
+    path: Assets/Scenes/Causeway3.unity
+    guid: 698b5ffa635abed4187d6f4830d4e709
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

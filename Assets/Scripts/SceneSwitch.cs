@@ -5,7 +5,6 @@ public class SceneSwitch : MonoBehaviour
     [SerializeField] private GameManager gameManager;
     [SerializeField] private string sceneName;
     [SerializeField] private Vector2 spawnLocation;
-    [SerializeField] private bool facingRight;
 
     private void Start()
     {
@@ -17,7 +16,7 @@ public class SceneSwitch : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            gameManager.LoadScene(sceneName, spawnLocation, facingRight);
+            gameManager.LoadScene(sceneName, spawnLocation);
         }
     }
 }

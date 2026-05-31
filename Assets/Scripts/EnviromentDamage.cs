@@ -5,7 +5,7 @@ public class EnviromentDamage : MonoBehaviour
 {
     // Variables
     //[SerializeField] private bool isCausingDamage = false;
-    [SerializeField] private bool canDamage = true;
+    //[SerializeField] private bool canDamage = true;
     [SerializeField] private bool playerTouching = false;
     [SerializeField] private float damageDelay = 1f;
     [SerializeField] private Character player;
@@ -29,8 +29,11 @@ public class EnviromentDamage : MonoBehaviour
 
         while (playerTouching && player != null)
         {
-            player.currentHealth--;
-            yield return new WaitForSeconds(damageDelay);
+            if (!player.activeIframes)
+            {
+                player.currentHealth--;
+                yield return new WaitForSeconds(damageDelay);
+            }
         }
 
         damageRoutine = null;
