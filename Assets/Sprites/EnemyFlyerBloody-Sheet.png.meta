@@ -1,13 +1,16 @@
 fileFormatVersion: 2
-guid: cabe1990f3ee08247ad41bb776adece2
+guid: b1631a1697fe73b4994c60ad0546508d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5336803267278195046
-    second: EnemyWalker-Sheet_0
+      213: -4766604622241702990
+    second: EnemyFlyerBloody-Sheet_0
   - first:
-      213: 5374702645719253266
-    second: EnemyWalker-Sheet_1
+      213: -5375712126776212767
+    second: EnemyFlyerBloody-Sheet_1
+  - first:
+      213: -4416805124666757125
+    second: EnemyFlyerBloody-Sheet_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -103,7 +106,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: EnemyWalker-Sheet_0
+      name: EnemyFlyerBloody-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -118,14 +121,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a963db934bddfe5b0800000000000000
-      internalID: -5336803267278195046
+      spriteID: 2bb5c82c95e99ddb0800000000000000
+      internalID: -4766604622241702990
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: EnemyWalker-Sheet_1
+      name: EnemyFlyerBloody-Sheet_1
       rect:
         serializedVersion: 2
         x: 32
@@ -140,8 +143,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 211c2737497c69a40800000000000000
-      internalID: 5374702645719253266
+      spriteID: 1e28ebc6d42a565b0800000000000000
+      internalID: -5375712126776212767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemyFlyerBloody-Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bffec1ee32b54b2c0800000000000000
+      internalID: -4416805124666757125
       vertices: []
       indices: 
       edges: []
@@ -150,7 +175,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 56781732d8247c844a4acedf2b475f7b
+    spriteID: 600cf5cd39b845c4595940dcfb21936e
     internalID: 0
     vertices: []
     indices: 
@@ -160,10 +185,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":2.0,"y":1.0},"gridSpriteSize":{"x":32.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":3.0,"y":1.0},"gridSpriteSize":{"x":32.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      EnemyWalker-Sheet_0: -5336803267278195046
-      EnemyWalker-Sheet_1: 5374702645719253266
+      EnemyFlyerBloody-Sheet_0: -4766604622241702990
+      EnemyFlyerBloody-Sheet_1: -5375712126776212767
+      EnemyFlyerBloody-Sheet_2: -4416805124666757125
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

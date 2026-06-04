@@ -51104,7 +51104,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24c97578fb1818a48beac4b9e2e52daf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnviromentDamage
-  canDamage: 1
   playerTouching: 0
   damageDelay: 1
   player: {fileID: 0}
@@ -60398,8 +60397,8 @@ Tilemap:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1289651990}
   - {fileID: 295627889}
+  - {fileID: 1289651990}
   - {fileID: 1701802788}
   - {fileID: 298160892}
   - {fileID: 1522737641}

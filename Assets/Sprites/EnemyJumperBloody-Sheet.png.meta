@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: cabe1990f3ee08247ad41bb776adece2
+guid: aa8042108f0972240a4467453b537b80
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5336803267278195046
-    second: EnemyWalker-Sheet_0
+      213: -1038434295938731413
+    second: EnemyJumperBloody-Sheet_0
   - first:
-      213: 5374702645719253266
-    second: EnemyWalker-Sheet_1
+      213: -8901194675334395316
+    second: EnemyJumperBloody-Sheet_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -103,7 +103,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: EnemyWalker-Sheet_0
+      name: EnemyJumperBloody-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -118,14 +118,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a963db934bddfe5b0800000000000000
-      internalID: -5336803267278195046
+      spriteID: b623dfb728db691f0800000000000000
+      internalID: -1038434295938731413
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: EnemyWalker-Sheet_1
+      name: EnemyJumperBloody-Sheet_1
       rect:
         serializedVersion: 2
         x: 32
@@ -140,8 +140,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 211c2737497c69a40800000000000000
-      internalID: 5374702645719253266
+      spriteID: c4a48147a9a987480800000000000000
+      internalID: -8901194675334395316
       vertices: []
       indices: 
       edges: []
@@ -150,7 +150,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 56781732d8247c844a4acedf2b475f7b
+    spriteID: ad7736b221ab897449807413250eb546
     internalID: 0
     vertices: []
     indices: 
@@ -162,8 +162,8 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":2.0,"y":1.0},"gridSpriteSize":{"x":32.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      EnemyWalker-Sheet_0: -5336803267278195046
-      EnemyWalker-Sheet_1: 5374702645719253266
+      EnemyJumperBloody-Sheet_0: -1038434295938731413
+      EnemyJumperBloody-Sheet_1: -8901194675334395316
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
