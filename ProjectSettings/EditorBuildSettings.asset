@@ -35,5 +35,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Canals1.unity
     guid: 0cec83270deaf324b9143c1ebdc94f4f
+  - enabled: 1
+    path: Assets/Scenes/Canals2.unity
+    guid: 3d8ae604896d605408ad66bbdb5975e8
+  - enabled: 1
+    path: Assets/Scenes/Canals3.unity
+    guid: 8fb51841f3228b9429672793fdd12268
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
