@@ -41,5 +41,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Canals3.unity
     guid: 8fb51841f3228b9429672793fdd12268
+  - enabled: 1
+    path: Assets/Scenes/Forge1.unity
+    guid: 679365951fdcd5c459abddacbd567df1
+  - enabled: 1
+    path: Assets/Scenes/Forge2.unity
+    guid: af456c17b2123a44eab0f780db3b9235
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
