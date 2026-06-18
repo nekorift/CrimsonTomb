@@ -31,7 +31,6 @@ public class Player : Character
     private PlayerInput input;
     [SerializeField] private GameObject rightAttack;
     [SerializeField] private GameObject leftAttack;
-    public GameObject Fade;
 
     // Input
     private Vector2 movementInput;

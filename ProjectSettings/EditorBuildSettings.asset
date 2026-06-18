@@ -50,5 +50,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Forge3.unity
     guid: a67c370a590a10c4e91e0bb5638d094b
+  - enabled: 1
+    path: Assets/Scenes/Tomb1.unity
+    guid: 25172ecfcb0c1e244af187cb145017bb
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
