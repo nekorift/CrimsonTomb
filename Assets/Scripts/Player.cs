@@ -10,6 +10,7 @@ public class Player : Character
     [SerializeField] private bool isAttacking = false;
     [SerializeField] private float attackLength = 0.3f;
     [SerializeField] public Vector2 spawnLocation;
+    private Coroutine attackRoutine = null;
 
     // Abilities Variables
     public bool hasDoubleJump = false;
@@ -31,6 +32,8 @@ public class Player : Character
     private PlayerInput input;
     [SerializeField] private GameObject rightAttack;
     [SerializeField] private GameObject leftAttack;
+    [SerializeField] private GameObject downAttack;
+    [SerializeField] private GameObject upAttack;
 
     // Input
     private Vector2 movementInput;
@@ -47,38 +50,34 @@ public class Player : Character
     void Update()
     {
         // Movement
-        //body.linearVelocity = new Vector2(movementInput.x * moveSpeed, body.linearVelocity.y);
-        if (!isDashing && !activeIframes) // Ensure only dash can override the player's velocity, otherwise the player will be able to move during the dash which is not intended
-            body.AddForce(new Vector2(movementInput.x, 0) * moveSpeed, ForceMode2D.Force);
+        if (!isAttacking)
+        {
+            //body.linearVelocity = new Vector2(movementInput.x * moveSpeed, body.linearVelocity.y);
+            if (!isDashing && !activeIframes) // Ensure only dash can override the player's velocity, otherwise the player will be able to move during the dash which is not intended
+                body.AddForce(new Vector2(movementInput.x, 0) * moveSpeed, ForceMode2D.Force);
 
-        if (!isSprinting && !isDashing)
-        {
-            if (body.linearVelocity.x > maxSpeed)
-                body.linearVelocity = new Vector2(maxSpeed, body.linearVelocity.y);
-            else if (body.linearVelocity.x < -maxSpeed)
-                body.linearVelocity = new Vector2(-maxSpeed, body.linearVelocity.y);
-        }
-        else if (isSprinting && !isDashing)
-        {
-            if (body.linearVelocity.x > sprintSpeed)
-                body.linearVelocity = new Vector2(sprintSpeed, body.linearVelocity.y);
-            else if (body.linearVelocity.x < -sprintSpeed)
-                body.linearVelocity = new Vector2(-sprintSpeed, body.linearVelocity.y);
+            if (!isSprinting && !isDashing)
+            {
+                if (body.linearVelocity.x > maxSpeed)
+                    body.linearVelocity = new Vector2(maxSpeed, body.linearVelocity.y);
+                else if (body.linearVelocity.x < -maxSpeed)
+                    body.linearVelocity = new Vector2(-maxSpeed, body.linearVelocity.y);
+            }
+            else if (isSprinting && !isDashing)
+            {
+                if (body.linearVelocity.x > sprintSpeed)
+                    body.linearVelocity = new Vector2(sprintSpeed, body.linearVelocity.y);
+                else if (body.linearVelocity.x < -sprintSpeed)
+                    body.linearVelocity = new Vector2(-sprintSpeed, body.linearVelocity.y);
+            }
+
+            if (movementInput.x < 0.1 && movementInput.x > -0.1f && !isDashing && !activeIframes && IsOnGround())
+            {
+                body.linearVelocity = new Vector2(0, body.linearVelocity.y);
+                StartCoroutine(StopSprinting()); // Stop sprinting after a short delay to allow for switching sides without immediately stopping sprinting
+            }
         }
 
-        if (movementInput.x < 0.1 && movementInput.x > -0.1f && !isDashing && !activeIframes && IsOnGround())
-        {
-            body.linearVelocity = new Vector2(0, body.linearVelocity.y);
-            StartCoroutine(StopSprinting()); // Stop sprinting after a short delay to allow for switching sides without immediately stopping sprinting
-        }
-
-        if (hasWallSlide)
-        {
-            if (IsBackTouchingWall() && !IsOnGround() && movementInput.x != 0)
-                body.linearVelocity = new Vector2(body.linearVelocity.x, Mathf.Clamp(body.linearVelocity.y, -2f, float.MaxValue)); // Limit the player's falling speed while wall sliding
-            else if (IsTouchingWall() && !IsOnGround() && movementInput.x != 0)
-                facingRight = !facingRight; // Flip the player's facing direction if they are touching a wall and not on the ground, to allow for wall sliding in both directions
-        }
         if (isAttacking && IsOnGround())
         {
             body.linearVelocity = new Vector2(0, body.linearVelocity.y); // Prevent movement input during attack to ensure the player can't move during the attack animation, which is not intended
@@ -88,6 +87,14 @@ public class Player : Character
             facingRight = true;
         else if (body.linearVelocity.x < -0.1f)
             facingRight = false;
+
+        if (hasWallSlide)
+        {
+            if (IsBackTouchingWall() && !IsOnGround() && movementInput.x != 0)
+                body.linearVelocity = new Vector2(body.linearVelocity.x, Mathf.Clamp(body.linearVelocity.y, -2f, float.MaxValue)); // Limit the player's falling speed while wall sliding
+            else if (IsTouchingWall() && !IsOnGround() && movementInput.x != 0)
+                facingRight = !facingRight; // Flip the player's facing direction if they are touching a wall and not on the ground, to allow for wall sliding in both directions
+        }
 
         if (IsOnGround() || (hasWallSlide && IsBackTouchingWall()))
         {
@@ -110,7 +117,69 @@ public class Player : Character
         else if (activeIframes && IsOnGround())
             animator.Play("PlayerDamageGround");
         else if (isAttacking)
-            animator.Play("PlayerAttack");
+        {
+            if (attackRoutine == null)
+            {
+                if (movementInput.x < 0)
+                {
+                    if (movementInput.y <= movementInput.x && !IsOnGround())
+                    {
+                        attackRoutine = StartCoroutine(Attack(downAttack));
+                        animator.Play("PlayerAttackDown");
+                    }
+                    else if (movementInput.y >= -movementInput.x)
+                    {
+                        attackRoutine = StartCoroutine(Attack(upAttack));
+                        animator.Play("PlayerAttackUp");
+                    }
+                    else
+                    {
+                        attackRoutine = StartCoroutine(Attack(leftAttack));
+                        animator.Play("PlayerAttack");
+                    }
+                }
+                else if (movementInput.x > 0)
+                {
+                    if (movementInput.y <= -movementInput.x && !IsOnGround())
+                    {
+                        attackRoutine = StartCoroutine(Attack(downAttack));
+                        animator.Play("PlayerAttackDown");
+                    }
+                    else if (movementInput.y >= movementInput.x)
+                    {
+                        attackRoutine = StartCoroutine(Attack(upAttack));
+                        animator.Play("PlayerAttackUp");
+                    }
+                    else
+                    {
+                        attackRoutine = StartCoroutine(Attack(rightAttack));
+                        animator.Play("PlayerAttack");
+                    }
+                }
+                else
+                {
+                    if (movementInput.y < 0 && !IsOnGround())
+                    {
+                        attackRoutine = StartCoroutine(Attack(downAttack));
+                        animator.Play("PlayerAttackDown");
+                    }
+                    else if (movementInput.y > 0)
+                    {
+                        attackRoutine = StartCoroutine(Attack(upAttack));
+                        animator.Play("PlayerAttackUp");
+                    }
+                    else
+                    {
+                        if (facingRight)
+                            attackRoutine = StartCoroutine(Attack(rightAttack));
+                        else
+                            attackRoutine = StartCoroutine(Attack(leftAttack));
+
+                        animator.Play("PlayerAttack");
+                    }
+                }
+            }
+        }
         else if (isDashing)
             animator.Play("PlayerDash");
         else if (hasWallSlide && IsBackTouchingWall() && !IsOnGround() && movementInput.x != 0)
@@ -123,7 +192,6 @@ public class Player : Character
             animator.Play("PlayerSprint");
         else if (movementInput.x == 0 && IsOnGround())
             animator.Play("PlayerIdle");
-
     }
 
     public void OnMove(InputValue input)
@@ -179,10 +247,11 @@ public class Player : Character
     {
         if (input.isPressed && !isDashing && !activeIframes && !isAttacking)
         {
-            if (facingRight)
-                StartCoroutine(Attack(rightAttack));
-            else
-                StartCoroutine(Attack(leftAttack));
+            //if (facingRight)
+            //    StartCoroutine(Attack(rightAttack));
+            //else
+            //    StartCoroutine(Attack(leftAttack));
+            isAttacking = true;
         }
     }
 
@@ -191,11 +260,12 @@ public class Player : Character
         Debug.Log("Attack activated! Facing right: " + facingRight);
         Collider2D attackCollider = attack.GetComponent<Collider2D>();  
 
-        isAttacking = true;
+        //isAttacking = true;
         attackCollider.enabled = true;
         yield return new WaitForSeconds(attackLength);
         isAttacking = false;
         attackCollider.enabled = false;
+        attackRoutine = null;
     }
 
     public void OnSprint(InputValue input)
