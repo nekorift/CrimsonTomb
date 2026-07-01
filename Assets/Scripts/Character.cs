@@ -20,7 +20,7 @@ public class Character : MonoBehaviour
     [SerializeField] public bool facingRight = true; // true for right, false for left
 
     // Components
-    protected Rigidbody2D body;
+    public Rigidbody2D body;
     [SerializeField] protected Animator animator;
     protected SpriteRenderer spriteRenderer;
     [SerializeField] protected Collider2D col;

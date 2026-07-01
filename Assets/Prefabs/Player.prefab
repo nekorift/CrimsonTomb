@@ -284,6 +284,7 @@ GameObject:
   - component: {fileID: 1152982632192171308}
   - component: {fileID: 525714835000932232}
   - component: {fileID: 8705301721596209347}
+  - component: {fileID: 6258616361369630388}
   m_Layer: 0
   m_Name: 'DownAttackHitbox '
   m_TagString: Untagged
@@ -359,11 +360,24 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6838497501116638844}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 68a9d4ccf0f7c2e40bfcf022422212d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAttackHitbox
+--- !u!114 &6258616361369630388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6838497501116638844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dec0405e97e5c347a491e088f8387c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAttackHitboxDown
+  player: {fileID: 1848764046646914056}
 --- !u!1 &6872357286097490391
 GameObject:
   m_ObjectHideFlags: 0
@@ -564,6 +578,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   facingRight: 1
+  body: {fileID: 0}
   animator: {fileID: 0}
   col: {fileID: 6277480385212143469}
   currentJumps: 0
