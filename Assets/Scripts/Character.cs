@@ -37,7 +37,7 @@ public class Character : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    public void RecieveDamage(float damage, Vector2 direction)
+    public virtual void RecieveDamage(float damage, Vector2 direction)
     {
         if (!activeIframes)
         {
@@ -60,6 +60,10 @@ public class Character : MonoBehaviour
 
                 }
                 else if (gameObject.tag == "Enemy")
+                {
+                    Destroy(gameObject);
+                }
+                else if (gameObject.tag == "Boss")
                 {
                     Destroy(gameObject);
                 }

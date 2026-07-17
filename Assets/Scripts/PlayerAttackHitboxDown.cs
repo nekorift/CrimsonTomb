@@ -6,7 +6,7 @@ public class PlayerAttackHitboxDown : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy"))
+        if (collision.CompareTag("Enemy") || collision.CompareTag("Boss"))
         {
             Character enemy = collision.gameObject.GetComponent<Character>();
             Character self = GetComponentInParent<Character>();

@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private Player player;
+    [SerializeField] private GameObject[] gates;
 
     private void Start()
     {
