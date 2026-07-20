@@ -114,7 +114,7 @@ public class Character : MonoBehaviour
     protected bool IsTouchingWall()
     {
         float checkRadius = 0.2f;
-        Vector2 checkPosition = new Vector2(transform.position.x + (facingRight ? (col.bounds.size.x / 2) : -(col.bounds.size.x / 2)), transform.position.y);
+        Vector2 checkPosition = new Vector2(transform.position.x + (facingRight ? ((col.bounds.size.x / 2) + col.offset.x) : -((col.bounds.size.x / 2) - col.offset.x)), transform.position.y);
 
         return Physics2D.OverlapCircle(checkPosition, checkRadius, groundLayer);
     }
@@ -122,7 +122,7 @@ public class Character : MonoBehaviour
     protected bool IsBackTouchingWall()
     {
         float checkRadius = 0.2f;
-        Vector2 checkPosition = new Vector2(transform.position.x + (facingRight ? -(col.bounds.size.x / 2) : (col.bounds.size.x / 2)), transform.position.y);
+        Vector2 checkPosition = new Vector2(transform.position.x + (facingRight ? -((col.bounds.size.x / 2) - col.offset.x) : ((col.bounds.size.x / 2) + col.offset.x)), transform.position.y);
 
         return Physics2D.OverlapCircle(checkPosition, checkRadius, groundLayer);
     }
@@ -136,12 +136,12 @@ public class Character : MonoBehaviour
 
         // Wall check gizmo
         Gizmos.color = Color.blue;
-        Vector2 wallCheckPosition = new Vector2(transform.position.x + (facingRight ? (col.bounds.size.x / 2) : -(col.bounds.size.x / 2)), transform.position.y);
+        Vector2 wallCheckPosition = new Vector2(transform.position.x + (facingRight ? ((col.bounds.size.x / 2) + col.offset.x) : -((col.bounds.size.x / 2) - col.offset.x)), transform.position.y);
         Gizmos.DrawWireSphere(wallCheckPosition, 0.2f);
 
         // Back wall check gizmo
         Gizmos.color = Color.yellow;
-        Vector2 backWallCheckPosition = new Vector2(transform.position.x + (facingRight ? -(col.bounds.size.x / 2) : (col.bounds.size.x / 2)), transform.position.y);
+        Vector2 backWallCheckPosition = new Vector2(transform.position.x + (facingRight ? -((col.bounds.size.x / 2) - col.offset.x) : ((col.bounds.size.x / 2) + col.offset.x)), transform.position.y);
         Gizmos.DrawWireSphere(backWallCheckPosition, 0.2f);
     }
 }
