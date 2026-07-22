@@ -73,7 +73,7 @@ public class Character : MonoBehaviour
             Debug.Log(gameObject.name + " has i-frames active.");
     }
 
-    private IEnumerator Iframe()
+    protected IEnumerator Iframe()
     {
         activeIframes = true;
         yield return new WaitForSeconds(iframeLength);
