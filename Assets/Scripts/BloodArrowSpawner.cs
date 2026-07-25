@@ -9,7 +9,7 @@ public class BloodArrowSpawner : MonoBehaviour
 
     private void Start()
     {
-        SpawnBloodArrow(); // Testing purpose
+        //SpawnBloodArrow(); // Testing purpose
     }
 
     public void SpawnBloodArrow()
@@ -19,8 +19,9 @@ public class BloodArrowSpawner : MonoBehaviour
         //    GameObject bloodArrow = Instantiate(bloodArrowPrefab, s.transform.position, Quaternion.identity);
         //    bloodArrow.transform.up = s.transform.up; // Set the arrow's up direction to match the spawner's up direction
         //}
+        // Worked well, but didn't allow any room for the player to dodge unless it was preset
 
-        int excluded = Random.Range(0, exclusionRange);
+        int excluded = Random.Range(1, exclusionRange);
 
         for (int i = 0; i < spawners.Length; i++)
         {

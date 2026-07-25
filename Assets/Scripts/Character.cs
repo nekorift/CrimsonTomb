@@ -65,7 +65,31 @@ public class Character : MonoBehaviour
                 }
                 else if (gameObject.tag == "Boss")
                 {
-                    Destroy(gameObject);
+                    //Destroy(gameObject);
+                    if (gameObject.name == "BossPresence1")
+                    {
+
+                    }
+                    else if (gameObject.name == "BossPresence2")
+                    {
+
+                    }
+                    else if (gameObject.name == "BossBat")
+                    {
+
+                    }
+                    else if (gameObject.name == "BossFireGiant")
+                    {
+
+                    }
+                    else if (gameObject.name == "BossRat")
+                    {
+
+                    }
+                    else if (gameObject.name == "BossPaladin")
+                    {
+
+                    }
                 }
             }
         }
