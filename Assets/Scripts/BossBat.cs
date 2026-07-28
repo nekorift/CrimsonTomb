@@ -10,6 +10,7 @@ public class BossBat : Character
     [SerializeField] private bool isPerched = false;
     [SerializeField] public bool isAttacking = false;
     private Coroutine perchRoutine;
+    [SerializeField] private GameObject gate;
 
     protected override void Start()
     {
@@ -71,5 +72,11 @@ public class BossBat : Character
         }
 
         perchRoutine = null;
+    }
+
+    public void Death()
+    {
+        Destroy(gate);
+        Destroy(gameObject);
     }
 }

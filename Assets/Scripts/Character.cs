@@ -76,7 +76,8 @@ public class Character : MonoBehaviour
                     }
                     else if (gameObject.name == "BossBat")
                     {
-
+                        BossBat boss = gameObject.GetComponent<BossBat>();
+                        boss.Death();
                     }
                     else if (gameObject.name == "BossFireGiant")
                     {

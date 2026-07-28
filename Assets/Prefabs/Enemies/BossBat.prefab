@@ -225,6 +225,7 @@ MonoBehaviour:
   currentPerch: -1
   isPerched: 0
   isAttacking: 0
+  gate: {fileID: 0}
 --- !u!50 &4192667423298403474
 Rigidbody2D:
   serializedVersion: 5
@@ -259,7 +260,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7266336808898204117}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}

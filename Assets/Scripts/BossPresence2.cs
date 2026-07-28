@@ -13,6 +13,7 @@ public class BossPresence2 : Character
     [SerializeField] private bool isSubmerging = false;
     private Coroutine attackRoutine;
     private Coroutine arrowsRoutine;
+    [SerializeField] private GameObject gate;
 
     protected override void Start()
     {
@@ -119,5 +120,11 @@ public class BossPresence2 : Character
         arrowSpawners[r].SpawnBloodArrow();
 
         arrowsRoutine = null;
+    }
+
+    public void Death()
+    {
+        Destroy(gate);
+        Destroy(gameObject);
     }
 }

@@ -8,6 +8,7 @@ public class BossRat : Character
     [SerializeField] public bool isAttacking = false;
     private Coroutine attackRoutine;
     [SerializeField] private CapsuleCollider2D dCol;
+    [SerializeField] private GameObject gate;
 
     protected override void Start()
     {
@@ -91,5 +92,11 @@ public class BossRat : Character
         }
 
         attackRoutine = null;
+    }
+
+    public void Death()
+    {
+        Destroy(gate);
+        Destroy(gameObject);
     }
 }

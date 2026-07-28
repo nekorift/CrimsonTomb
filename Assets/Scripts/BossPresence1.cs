@@ -11,6 +11,7 @@ public class BossPresence1 : Character
     [SerializeField] private bool isAttacking = false;
     private Coroutine attackRoutine;
     private Coroutine arrowsRoutine;
+    [SerializeField] private GameObject phase2;
 
     protected override void Start()
     {
@@ -80,5 +81,11 @@ public class BossPresence1 : Character
         arrowSpawners[r].SpawnBloodArrow();
 
         arrowsRoutine = null;
+    }
+
+    public void Death()
+    {
+        Instantiate(phase2, transform.position, Quaternion.identity);
+        Destroy(gameObject);
     }
 }

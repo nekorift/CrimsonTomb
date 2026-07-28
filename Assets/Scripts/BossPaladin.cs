@@ -11,6 +11,7 @@ public class BossPaladin : Character
     [SerializeField] private BoxCollider2D dCol;
     [SerializeField] private Sprite[] sprites;
     [SerializeField] private GameObject hammer;
+    [SerializeField] private GameObject gate;
 
     protected override void Start()
     {
@@ -145,5 +146,11 @@ public class BossPaladin : Character
     {
         isAttacking = false;
         isIdle = false;
+    }
+
+    public void Death()
+    {
+        Destroy(gate);
+        Destroy(gameObject);
     }
 }

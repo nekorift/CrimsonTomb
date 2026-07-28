@@ -1,7 +1,7 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class Player : Character
 {
@@ -10,6 +10,8 @@ public class Player : Character
     [SerializeField] private bool isAttacking = false;
     [SerializeField] private float attackLength = 0.3f;
     [SerializeField] public Vector2 spawnLocation;
+    [SerializeField] private bool canInteract = false;
+    [SerializeField] private GameObject interactableObject = null;
     private Coroutine attackRoutine = null;
 
     // Abilities Variables
@@ -325,5 +327,57 @@ public class Player : Character
         //Debug.Log("Dash successful!");
         body.gravityScale = originalGravity;
         isDashing = false;
+    }
+
+    public void OnInteract(InputValue input)
+    {
+        if (input.isPressed && canInteract)
+        {
+            if (interactableObject.CompareTag("Seal"))
+            {
+                if (SceneManager.GetActiveScene().name == "Spires5")
+                {
+                    hasDoubleJump = true;
+                }
+                else if (SceneManager.GetActiveScene().name == "Causeway5")
+                {
+                    hasSprint = true;
+                }
+                else if (SceneManager.GetActiveScene().name == "Canals5")
+                {
+                    hasDash = true;
+                }
+                else if (SceneManager.GetActiveScene().name == "Forge5")
+                {
+                    hasWallSlide = true;
+                }
+
+                interactableObject.GetComponent<Seal>().BreakSeal();
+            }    
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Seal")
+        {
+            canInteract = true;
+            interactableObject = collision.gameObject;
+            Debug.Log("Player can interact with " + collision.gameObject.name);
+
+            // Add UI prompt
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Seal")
+        {
+            canInteract = false;
+            interactableObject = null;
+            Debug.Log("Player can no longer interact with " + collision.gameObject.name);
+
+            // Remove UI prompt
+        }
     }
 }

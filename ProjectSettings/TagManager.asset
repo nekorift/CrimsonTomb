@@ -8,6 +8,7 @@ TagManager:
   - PlayerSpawner
   - PlayerAttack
   - Boss
+  - Seal
   layers:
   - Default
   - TransparentFX
