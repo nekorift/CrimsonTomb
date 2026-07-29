@@ -68,11 +68,13 @@ public class Character : MonoBehaviour
                     //Destroy(gameObject);
                     if (gameObject.name == "BossPresence1")
                     {
-
+                        BossPresence1 boss = gameObject.GetComponent<BossPresence1>();
+                        boss.Death();
                     }
                     else if (gameObject.name == "BossPresence2")
                     {
-
+                        BossPresence2 boss = gameObject.GetComponent<BossPresence2>();
+                        boss.Death();
                     }
                     else if (gameObject.name == "BossBat")
                     {
@@ -81,15 +83,18 @@ public class Character : MonoBehaviour
                     }
                     else if (gameObject.name == "BossFireGiant")
                     {
-
+                        BossFireGiant boss = gameObject.GetComponent<BossFireGiant>();
+                        boss.Death();
                     }
                     else if (gameObject.name == "BossRat")
                     {
-
+                        BossRat boss = gameObject.GetComponent<BossRat>();
+                        boss.Death();
                     }
                     else if (gameObject.name == "BossPaladin")
                     {
-
+                        BossPaladin boss = gameObject.GetComponent<BossPaladin>();
+                        boss.Death();
                     }
                 }
             }

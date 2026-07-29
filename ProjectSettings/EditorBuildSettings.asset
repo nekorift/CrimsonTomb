@@ -39,6 +39,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Causeway3.unity
     guid: 698b5ffa635abed4187d6f4830d4e709
   - enabled: 1
+    path: Assets/Scenes/Causeway4.unity
+    guid: 842f1ae63f8bd8040bae49da5667ed80
+  - enabled: 1
+    path: Assets/Scenes/Causeway5.unity
+    guid: 8246dfe2d2e2bc24494e53b524445fe8
+  - enabled: 1
     path: Assets/Scenes/Canals1.unity
     guid: 0cec83270deaf324b9143c1ebdc94f4f
   - enabled: 1
@@ -47,6 +53,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Canals3.unity
     guid: 8fb51841f3228b9429672793fdd12268
+  - enabled: 1
+    path: Assets/Scenes/Canals4.unity
+    guid: 93ffe0afee097764d9e3ddce0bd8d386
+  - enabled: 1
+    path: Assets/Scenes/Canals5.unity
+    guid: da3e139bf46e47b4997005a5434ad257
   - enabled: 1
     path: Assets/Scenes/Forge1.unity
     guid: 679365951fdcd5c459abddacbd567df1
