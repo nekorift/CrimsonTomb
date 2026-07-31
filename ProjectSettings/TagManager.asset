@@ -9,6 +9,7 @@ TagManager:
   - PlayerAttack
   - Boss
   - Seal
+  - Door
   layers:
   - Default
   - TransparentFX

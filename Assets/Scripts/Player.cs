@@ -353,7 +353,16 @@ public class Player : Character
                 }
 
                 interactableObject.GetComponent<Seal>().BreakSeal();
-            }    
+            }
+            else if (interactableObject.CompareTag("Door"))
+            {
+                if (interactableObject.GetComponent<Door>().open)
+                {
+                    interactableObject.GetComponent<Door>().LoadScene();
+                }
+            }
+            else
+                Debug.Log("Player interacted with " + interactableObject.name + " but it has no interaction logic.");
         }
     }
 
@@ -367,11 +376,27 @@ public class Player : Character
 
             // Add UI prompt
         }
+        else if (collision.gameObject.tag == "Door")
+        {
+            canInteract = true;
+            interactableObject = collision.gameObject;
+            Debug.Log("Player can interact with " + collision.gameObject.name);
+
+            // Add UI prompt
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Seal")
+        {
+            canInteract = false;
+            interactableObject = null;
+            Debug.Log("Player can no longer interact with " + collision.gameObject.name);
+
+            // Remove UI prompt
+        }
+        else if (collision.gameObject.tag == "Door")
         {
             canInteract = false;
             interactableObject = null;

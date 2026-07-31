@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PaladinHammer : MonoBehaviour
@@ -14,6 +15,9 @@ public class PaladinHammer : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         GameObject p = GameObject.FindGameObjectWithTag("Boss");
         paladin = p.GetComponent<BossPaladin>();
+
+        // In case the boss dies before hammer returns, potentially locking the player on the wrong side of the room
+        StartCoroutine(DestroyHammer());
     }
 
     void FixedUpdate()
@@ -41,5 +45,11 @@ public class PaladinHammer : MonoBehaviour
                 Destroy(this.gameObject);
             }
         }
+    }
+
+    private IEnumerator DestroyHammer()
+    {
+        yield return new WaitForSeconds(10f);
+        Destroy(this.gameObject);
     }
 }
