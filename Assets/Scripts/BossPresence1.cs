@@ -75,7 +75,7 @@ public class BossPresence1 : Character
 
     private IEnumerator Arrows()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(5f);
 
         int r = Random.Range(1, arrowSpawners.Length);
         arrowSpawners[r].SpawnBloodArrow();
@@ -85,7 +85,18 @@ public class BossPresence1 : Character
 
     public void Death()
     {
-        Instantiate(phase2, transform.position, Quaternion.identity);
+        GameObject p2object = Instantiate(phase2, transform.position, Quaternion.identity);
+
+        BossPresence2 p2 = p2object.GetComponent<BossPresence2>();
+        p2.perches = perches;
+
+        p2.arrowSpawners = new BloodArrowSpawner[arrowSpawners.Length - 1];
+
+        for (int i = 1; i < arrowSpawners.Length; i++)
+        {
+                p2.arrowSpawners[i - 1] = arrowSpawners[i];
+        }
+
         Destroy(gameObject);
     }
 }

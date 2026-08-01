@@ -15,7 +15,7 @@ public class Character : MonoBehaviour
     [SerializeField] protected float knockbackForce = 2f;
 
     [SerializeField] protected bool canJump;
-    [SerializeField] protected LayerMask groundLayer;
+    [SerializeField] public LayerMask groundLayer;
 
     [SerializeField] public bool facingRight = true; // true for right, false for left
 

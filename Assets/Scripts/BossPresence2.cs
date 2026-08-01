@@ -5,8 +5,8 @@ public class BossPresence2 : Character
 {
     // Variables
     [SerializeField] private GameObject player;
-    [SerializeField] private GameObject[] perches;
-    [SerializeField] private BloodArrowSpawner[] arrowSpawners; // 0 is a child making a ring around the boss
+    [SerializeField] public GameObject[] perches;
+    [SerializeField] public BloodArrowSpawner[] arrowSpawners; // 0 is a child making a ring around the boss
     [SerializeField] private int currentPerch = 0;
     [SerializeField] private bool isAttacking = false;
     [SerializeField] private bool isEmerging = false;
@@ -124,7 +124,8 @@ public class BossPresence2 : Character
 
     public void Death()
     {
-        Destroy(gate);
+        // Add game over logic
+
         Destroy(gameObject);
     }
 }

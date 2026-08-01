@@ -290,7 +290,7 @@ GameObject:
   - component: {fileID: 3801280915683655853}
   - component: {fileID: 1611045393464248553}
   - component: {fileID: 7158549934421364283}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -681,6 +681,7 @@ MonoBehaviour:
   - {fileID: 1278689548849688531}
   currentPerch: 0
   isAttacking: 0
+  phase2: {fileID: 3463887816520143621, guid: 8207cbb5f9474a9468ab97a5b11f34b1, type: 3}
 --- !u!50 &6486382023670861216
 Rigidbody2D:
   serializedVersion: 5
