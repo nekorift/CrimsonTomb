@@ -77,6 +77,15 @@ public class BossFireGiant : Character
             dCol.size = new Vector2(2.3f, 4f);
             animator.Play("Attacking");
         }
+
+        if (activeIframes)
+        {
+            GetComponent<SpriteRenderer>().color = new Color(1f, 0.5f, 0.5f, 1f);
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
+        }
     }
 
     private IEnumerator Attack()

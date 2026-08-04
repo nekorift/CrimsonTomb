@@ -52,6 +52,15 @@ public class BossPresence1 : Character
                 }
             }
         }
+
+        if (activeIframes)
+        {
+            GetComponent<SpriteRenderer>().color = new Color(1f, 0.5f, 0.5f, 1f);
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
+        }
     }
 
     private IEnumerator Attack()

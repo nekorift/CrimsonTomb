@@ -1,5 +1,7 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Character : MonoBehaviour
 {
@@ -44,20 +46,45 @@ public class Character : MonoBehaviour
             currentHealth -= damage;
             StartCoroutine(Iframe());
 
-            if (gameObject.tag == "Player" || gameObject.tag == "Enemy")
+            if (gameObject.tag == "Player")
+            {
+                body.linearVelocity = Vector2.zero; // Reset velocity to ensure consistent knockback regardless of current movement
+                //body.linearVelocity += new Vector2(direction ? -15f : 15f, 5f);
+                body.AddForce(new Vector2(direction.x * knockbackForce, knockbackForce), ForceMode2D.Impulse);
+
+                Player player = gameObject.GetComponent<Player>();
+
+                for (int i = 0; i < maxHealth; i++)
+                {
+                    if (i < currentHealth)
+                    {
+                        player.UiHp[i].GetComponent<Image>().sprite = player.hearts[1];
+                    }
+                    else
+                    {
+                        player.UiHp[i].GetComponent<Image>().sprite = player.hearts[0];
+                    }
+                }
+            }
+            else if (gameObject.tag == "Enemy")
             {
                 body.linearVelocity = Vector2.zero; // Reset velocity to ensure consistent knockback regardless of current movement
                 //body.linearVelocity += new Vector2(direction ? -15f : 15f, 5f);
                 body.AddForce(new Vector2(direction.x * knockbackForce, knockbackForce), ForceMode2D.Impulse);
             }
-
+            
             Debug.Log(gameObject.name + " received " + damage + " damage. Current health: " + currentHealth);
 
             if (currentHealth <= 0)
             {
                 if (gameObject.tag == "Player")
                 {
+                    Player player = gameObject.GetComponent<Player>();
 
+                    player.blackScreen.GetComponent<Animator>().Play("Fade");
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Usually not necessary with how enemy spawns are handled, but during boss fights the boss would keep its health
+                    player.transform.position = player.spawnLocation;
+                    player.currentHealth = maxHealth;
                 }
                 else if (gameObject.tag == "Enemy")
                 {

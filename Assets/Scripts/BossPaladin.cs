@@ -84,6 +84,15 @@ public class BossPaladin : Character
         {
             spriteRenderer.sprite = sprites[2];
         }
+
+        if (activeIframes)
+        {
+            GetComponent<SpriteRenderer>().color = new Color(1f, 0.5f, 0.5f, 1f);
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
+        }
     }
 
     private IEnumerator AttackRoutine()

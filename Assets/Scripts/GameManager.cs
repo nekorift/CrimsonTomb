@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadScene(string scene, Vector2 location)
     {
+        player.blackScreen.GetComponent<Animator>().Play("Fade");
         SceneManager.LoadScene(scene);
         player.spawnLocation = location;
         player.transform.position = location;

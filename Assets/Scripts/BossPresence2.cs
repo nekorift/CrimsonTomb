@@ -73,6 +73,15 @@ public class BossPresence2 : Character
         {
             animator.Play("AttackPhase");
         }
+
+        if (activeIframes)
+        {
+            GetComponent<SpriteRenderer>().color = new Color(1f, 0.5f, 0.5f, 1f);
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
+        }
     }
 
     public void ChangeAnimation()

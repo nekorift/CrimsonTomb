@@ -37,6 +37,11 @@ public class Player : Character
     [SerializeField] private GameObject downAttack;
     [SerializeField] private GameObject upAttack;
 
+    // UI Components
+    [SerializeField] public GameObject[] UiHp;
+    [SerializeField] public Sprite[] hearts;
+    [SerializeField] public GameObject blackScreen;
+
     // Input
     private Vector2 movementInput;
 
@@ -51,6 +56,11 @@ public class Player : Character
 
     void Update()
     {
+        if (currentHealth <= 0)
+        {
+            movementInput = Vector2.zero; // Prevent movement input when dead
+        }
+
         // Movement
         if (!isAttacking)
         {
