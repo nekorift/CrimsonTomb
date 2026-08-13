@@ -1,0 +1,11 @@
+{
+    "scene": "TutorialArea1",
+    "playerPosition": {
+        "x": 0.0,
+        "y": 0.0
+    },
+    "hasDoubleJump": false,
+    "hasDash": false,
+    "hasSprint": false,
+    "hasWallSlide": false
+}
