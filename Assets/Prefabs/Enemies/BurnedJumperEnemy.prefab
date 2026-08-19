@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8300413878844573557}
   - component: {fileID: 8870139232836564556}
   m_Layer: 7
-  m_Name: Burned Jumper Enemy
+  m_Name: BurnedJumperEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -185,8 +185,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   facingRight: 1
+  body: {fileID: 0}
   animator: {fileID: 0}
   col: {fileID: 8300413878844573557}
+  deathSfx: {fileID: 5799434399094962291, guid: a3f2c2f634b36f548b1c10c2e9250cc4, type: 3}
   player: {fileID: 0}
   sprites:
   - {fileID: -2161544802312648053, guid: 336f68f8e2af8644fa6f0b7ca58b4e8f, type: 3}

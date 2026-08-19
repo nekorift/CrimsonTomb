@@ -186,8 +186,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   facingRight: 1
+  body: {fileID: 0}
   animator: {fileID: 0}
   col: {fileID: 2076621636373889711}
+  deathSfx: {fileID: 5799434399094962291, guid: a3f2c2f634b36f548b1c10c2e9250cc4, type: 3}
   player: {fileID: 0}
 --- !u!95 &5935240630746838198
 Animator:

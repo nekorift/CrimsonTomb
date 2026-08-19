@@ -1,3 +1,4 @@
+using System.Collections;
 using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -27,6 +28,22 @@ public class GameManager : MonoBehaviour
         currentScene = scene;
 
         SaveGame();
+    }
+
+    public void NewGame()
+    {
+        SceneManager.LoadScene("Intro");
+    }
+
+    public void FinishGame()
+    {
+        StartCoroutine(Finish());
+    }
+
+    private IEnumerator Finish()
+    {
+        yield return new WaitForSeconds(3f);
+        SceneManager.LoadScene("Outro");
     }
 
     public void StartNewGame()

@@ -208,9 +208,11 @@ MonoBehaviour:
   body: {fileID: 8885267733023275387}
   animator: {fileID: 0}
   col: {fileID: 173392131178806904}
+  deathSfx: {fileID: 5799434399094962291, guid: a3f2c2f634b36f548b1c10c2e9250cc4, type: 3}
   player: {fileID: 0}
   isAttacking: 0
   dCol: {fileID: 8603284396268768509}
+  gate: {fileID: 0}
 --- !u!50 &8885267733023275387
 Rigidbody2D:
   serializedVersion: 5

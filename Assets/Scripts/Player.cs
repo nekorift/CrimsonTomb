@@ -45,6 +45,11 @@ public class Player : Character
     // Input
     private Vector2 movementInput;
 
+    // Sound Effects
+    [SerializeField] private AudioSource attackSfx;
+    [SerializeField] private AudioSource dashSfx;
+    [SerializeField] public AudioSource hitSfx;
+
     protected override void Start()
     {
         DontDestroyOnLoad(this);
@@ -272,6 +277,8 @@ public class Player : Character
         Debug.Log("Attack activated! Facing right: " + facingRight);
         Collider2D attackCollider = attack.GetComponent<Collider2D>();  
 
+        attackSfx.Play();
+
         //isAttacking = true;
         attackCollider.enabled = true;
         yield return new WaitForSeconds(attackLength);
@@ -326,6 +333,9 @@ public class Player : Character
 
         // Dash
         //Debug.Log("Dash activated! Facing right: " + facingRight + ", Can dash: " + canDash + ", Has dash: " + hasDash);
+
+        dashSfx.Play();
+
         canDash = false;
         isDashing = true;
         float originalGravity = body.gravityScale; // Ensure to store the original gravity scale to restore it later

@@ -133,7 +133,8 @@ public class BossPresence2 : Character
 
     public void Death()
     {
-        // Add game over logic
+        GameManager gameManager = FindAnyObjectByType<GameManager>();
+        gameManager.FinishGame();
 
         Destroy(gameObject);
     }

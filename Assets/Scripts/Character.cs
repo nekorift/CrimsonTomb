@@ -26,6 +26,7 @@ public class Character : MonoBehaviour
     [SerializeField] protected Animator animator;
     protected SpriteRenderer spriteRenderer;
     [SerializeField] protected Collider2D col;
+    [SerializeField] protected GameObject deathSfx;
 
     protected virtual void Start()
     { 
@@ -54,6 +55,8 @@ public class Character : MonoBehaviour
 
                 Player player = gameObject.GetComponent<Player>();
 
+                player.hitSfx.Play();
+
                 for (int i = 0; i < maxHealth; i++)
                 {
                     if (i < currentHealth)
@@ -77,6 +80,13 @@ public class Character : MonoBehaviour
 
             if (currentHealth <= 0)
             {
+                if (gameObject.tag != "Player")
+                    Instantiate(deathSfx, transform.position, Quaternion.identity);
+                else
+                {
+                    deathSfx.GetComponent<AudioSource>().Play();
+                }
+
                 if (gameObject.tag == "Player")
                 {
                     Player player = gameObject.GetComponent<Player>();

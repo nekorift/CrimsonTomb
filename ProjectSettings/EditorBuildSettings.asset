@@ -89,5 +89,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Tomb4.unity
     guid: 709de03fd2b1fe3448620dbf22d67cb6
+  - enabled: 1
+    path: Assets/Scenes/Cutscenes/Intro.unity
+    guid: c105023c99438354fa1618852abc6480
+  - enabled: 1
+    path: Assets/Scenes/Cutscenes/Outro.unity
+    guid: c3ca0b7b3bff7d948a24d788e2218a6c
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

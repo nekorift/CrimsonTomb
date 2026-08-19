@@ -230,6 +230,7 @@ MonoBehaviour:
   body: {fileID: 4659247629286786608}
   animator: {fileID: 0}
   col: {fileID: 8385660304559325034}
+  deathSfx: {fileID: 5799434399094962291, guid: a3f2c2f634b36f548b1c10c2e9250cc4, type: 3}
   player: {fileID: 0}
   perches:
   - {fileID: 0}
