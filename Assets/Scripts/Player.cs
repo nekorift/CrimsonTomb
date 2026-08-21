@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Player : Character
 {
@@ -209,6 +210,18 @@ public class Player : Character
             animator.Play("PlayerSprint");
         else if (movementInput.x == 0 && IsOnGround())
             animator.Play("PlayerIdle");
+
+        for (int i = 0; i < maxHealth; i++)
+        {
+            if (i < currentHealth)
+            {
+                UiHp[i].GetComponent<Image>().sprite = hearts[1];
+            }
+            else
+            {
+                UiHp[i].GetComponent<Image>().sprite = hearts[0];
+            }
+        }
     }
 
     public void OnMove(InputValue input)

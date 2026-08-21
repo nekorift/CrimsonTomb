@@ -45,29 +45,22 @@ public class Character : MonoBehaviour
         if (!activeIframes)
         {
             currentHealth -= damage;
-            StartCoroutine(Iframe());
+
+            if (direction != Vector2.zero)
+                StartCoroutine(Iframe());
 
             if (gameObject.tag == "Player")
             {
-                body.linearVelocity = Vector2.zero; // Reset velocity to ensure consistent knockback regardless of current movement
-                //body.linearVelocity += new Vector2(direction ? -15f : 15f, 5f);
-                body.AddForce(new Vector2(direction.x * knockbackForce, knockbackForce), ForceMode2D.Impulse);
+                if (direction != Vector2.zero)
+                {
+                    body.linearVelocity = Vector2.zero; // Reset velocity to ensure consistent knockback regardless of current movement
+                    //body.linearVelocity += new Vector2(direction ? -15f : 15f, 5f);
+                    body.AddForce(new Vector2(direction.x * knockbackForce, knockbackForce), ForceMode2D.Impulse);
+                }
 
                 Player player = gameObject.GetComponent<Player>();
 
                 player.hitSfx.Play();
-
-                for (int i = 0; i < maxHealth; i++)
-                {
-                    if (i < currentHealth)
-                    {
-                        player.UiHp[i].GetComponent<Image>().sprite = player.hearts[1];
-                    }
-                    else
-                    {
-                        player.UiHp[i].GetComponent<Image>().sprite = player.hearts[0];
-                    }
-                }
             }
             else if (gameObject.tag == "Enemy")
             {

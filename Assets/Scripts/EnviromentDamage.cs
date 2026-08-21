@@ -31,8 +31,13 @@ public class EnviromentDamage : MonoBehaviour
         {
             if (!player.activeIframes)
             {
-                player.currentHealth--;
+                //player.currentHealth--;
+                player.RecieveDamage(1f, Vector2.zero);
                 yield return new WaitForSeconds(damageDelay);
+            }
+            else
+            {
+                yield return null;
             }
         }
 
