@@ -42,6 +42,8 @@ public class Player : Character
     [SerializeField] public GameObject[] UiHp;
     [SerializeField] public Sprite[] hearts;
     [SerializeField] public GameObject blackScreen;
+    [SerializeField] public GameObject pauseMenu;
+    [SerializeField] public bool isPaused;
 
     // Input
     private Vector2 movementInput;
@@ -231,6 +233,8 @@ public class Player : Character
 
     public void OnJump(InputValue input)
     {
+        Debug.Log("Jump input: " + input.isPressed);
+
         // Set how many jumps the player can make
         if (hasDoubleJump)
             maxJumps = 2;
@@ -271,11 +275,19 @@ public class Player : Character
                 currentJumps++;
             }
         }
+
+        if (!input.isPressed)
+        {
+            if (body.linearVelocity.y > 0)
+            {
+                body.linearVelocity = new Vector2(body.linearVelocity.x, 0); // Reset vertical velocity when jump button is released early
+            }
+        }
     }
 
     public void OnAttack(InputValue input)
     {
-        if (input.isPressed && !isDashing && !activeIframes && !isAttacking)
+        if (input.isPressed && !isDashing && !activeIframes && !isAttacking && !isPaused)
         {
             //if (facingRight)
             //    StartCoroutine(Attack(rightAttack));
@@ -397,6 +409,38 @@ public class Player : Character
             else
                 Debug.Log("Player interacted with " + interactableObject.name + " but it has no interaction logic.");
         }
+    }
+
+    public void OnPause(InputValue input)
+    {
+        if (input.isPressed)
+        {
+            PauseGame();
+        }
+    }
+
+    public void PauseGame()
+    {
+        isPaused = !isPaused;
+        pauseMenu.SetActive(isPaused);
+
+        if (isPaused)
+        {
+            Time.timeScale = 0f;
+            pauseMenu.SetActive(true);
+        }
+        else
+        {
+            Time.timeScale = 1f;
+            pauseMenu.SetActive(false);
+        }
+    }
+
+    public void MainMenu()
+    {
+        GameManager gm = FindAnyObjectByType<GameManager>();
+        gm.ReturnToMenu();
+        Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

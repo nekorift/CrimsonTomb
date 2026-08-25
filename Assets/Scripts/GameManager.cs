@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(scene);
         player.spawnLocation = location;
         player.transform.position = location;
+        player.currentHealth = player.maxHealth;
         currentScene = scene;
 
         SaveGame();
@@ -52,6 +53,15 @@ public class GameManager : MonoBehaviour
         player = p.GetComponent<Player>();
 
         LoadScene("TutorialArea1", Vector2.zero);
+    }
+
+    public void ReturnToMenu()
+    {
+        Time.timeScale = 1f;
+
+        Destroy(gameObject);
+
+        SceneManager.LoadScene("MainMenu");
     }
 
     private void SaveGame()

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Character : MonoBehaviour
 {
     // Variables
-    [SerializeField] protected float maxHealth = 1f;
+    [SerializeField] public float maxHealth = 1f;
     [SerializeField] public float currentHealth;
     [SerializeField] protected float moveSpeed = 5f;
     [SerializeField] protected float maxSpeed = 5f;
