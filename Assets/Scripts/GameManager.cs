@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
         //    player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
-    public void LoadScene(string scene, Vector2 location)
+    public void LoadScene(string scene, Vector2 location, bool save = true)
     {
         player.blackScreen.GetComponent<Animator>().Play("Fade");
         SceneManager.LoadScene(scene);
@@ -28,7 +28,8 @@ public class GameManager : MonoBehaviour
         player.currentHealth = player.maxHealth;
         currentScene = scene;
 
-        SaveGame();
+        if (save)
+            SaveGame();
     }
 
     public void NewGame()
@@ -66,6 +67,8 @@ public class GameManager : MonoBehaviour
 
     private void SaveGame()
     {
+        Debug.Log("Saving game...");
+
         SaveData saveData = new SaveData
         {
             scene = currentScene,
@@ -92,7 +95,7 @@ public class GameManager : MonoBehaviour
         GameObject p = Instantiate(playerObject);
         player = p.GetComponent<Player>();
 
-        LoadScene(saveData.scene, saveData.playerPosition);
+        LoadScene(saveData.scene, saveData.playerPosition, false);
         player.hasDoubleJump = saveData.hasDoubleJump;
         player.hasDash = saveData.hasDash;
         player.hasSprint = saveData.hasSprint;
