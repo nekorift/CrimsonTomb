@@ -1485,7 +1485,7 @@ MonoBehaviour:
   dashTime: 0.5
   hasSprint: 0
   isSprinting: 0
-  sprintSpeed: 10
+  sprintSpeed: 5
   hasWallSlide: 0
   rightAttack: {fileID: 3819201119612564793}
   leftAttack: {fileID: 5395618206915526566}

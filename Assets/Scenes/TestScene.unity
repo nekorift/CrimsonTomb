@@ -1405,11 +1405,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3463887816520143621, guid: 8207cbb5f9474a9468ab97a5b11f34b1, type: 3}
       propertyPath: m_Name
-      value: BossPresence2
+      value: BossPresence2(Clone)
       objectReference: {fileID: 0}
     - target: {fileID: 3463887816520143621, guid: 8207cbb5f9474a9468ab97a5b11f34b1, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

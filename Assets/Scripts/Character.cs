@@ -101,8 +101,9 @@ public class Character : MonoBehaviour
                         BossPresence1 boss = gameObject.GetComponent<BossPresence1>();
                         boss.Death();
                     }
-                    else if (gameObject.name == "BossPresence2")
+                    else if (gameObject.name == "BossPresence2(Clone)")
                     {
+                        Debug.Log("Presence killed");
                         BossPresence2 boss = gameObject.GetComponent<BossPresence2>();
                         boss.Death();
                     }

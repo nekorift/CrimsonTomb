@@ -5,6 +5,7 @@ public class CutsceneScrollOutro : MonoBehaviour
 {
     // Variables
     [SerializeField] private GameManager gameManager;
+    [SerializeField] private RectTransform panel;
     [SerializeField] private RectTransform text;
     [SerializeField] private RectTransform scroll;
     [SerializeField] private float top;
@@ -19,12 +20,10 @@ public class CutsceneScrollOutro : MonoBehaviour
         gameManager = FindAnyObjectByType<GameManager>();
         scroll = GetComponent<RectTransform>();
 
-        RectTransform canvas = GetComponentInParent<Canvas>().GetComponent<RectTransform>();
+        Vector3[] panelCorners = new Vector3[4];
+        panel.GetWorldCorners(panelCorners);
 
-        Vector3[] canvasCorners = new Vector3[4];
-        canvas.GetWorldCorners(canvasCorners);
-
-        top = canvasCorners[1].y; // top left corner
+        top = panelCorners[1].y; // top left corner
     }
 
     void Update()
