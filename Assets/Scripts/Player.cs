@@ -42,8 +42,10 @@ public class Player : Character
     [SerializeField] public GameObject[] UiHp;
     [SerializeField] public Sprite[] hearts;
     [SerializeField] public GameObject blackScreen;
-    [SerializeField] public GameObject pauseMenu;
     [SerializeField] public bool isPaused;
+    [SerializeField] public GameObject pauseMenu;
+    [SerializeField] public GameObject menuButtons;
+    [SerializeField] public GameObject controlMenu;
 
     // Input
     private Vector2 movementInput;
@@ -428,11 +430,15 @@ public class Player : Character
         {
             Time.timeScale = 0f;
             pauseMenu.SetActive(true);
+            menuButtons.SetActive(true);
+            controlMenu.SetActive(false);
         }
         else
         {
             Time.timeScale = 1f;
             pauseMenu.SetActive(false);
+            menuButtons.SetActive(false);
+            controlMenu.SetActive(false);
         }
     }
 
@@ -441,6 +447,18 @@ public class Player : Character
         GameManager gm = FindAnyObjectByType<GameManager>();
         gm.ReturnToMenu();
         Destroy(gameObject);
+    }
+
+    public void OpenControls()
+    {
+        menuButtons.SetActive(false);
+        controlMenu.SetActive(true);
+    }
+
+    public void CloseControls()
+    {
+        menuButtons.SetActive(true);
+        controlMenu.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
